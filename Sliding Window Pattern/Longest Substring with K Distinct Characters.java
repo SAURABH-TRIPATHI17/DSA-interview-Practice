@@ -25,20 +25,20 @@ import java.util.*;
 
 class LongestSubstringKDistinct
 {
-	mpublic static int findLength(String str,int k)
+	public static int findLength(String str,int k)
 	{
 		int windowStart=0,maxLength=0;
-		HashMap<Character,Integer> frequencyMap = new HashMap<>();
+		HashMap<Character,Integer> frequencyMap = new HashMap<>(); // Store frequency of charecters in substring window
 		Character leftChar, rightChar;
 		for (int windowEnd = 0 ; windowEnd < str.length() ;windowEnd++ ) {
 			rightChar = str.charAt(windowEnd);
-			frequencyMap.put(rightChar, frequencyMap.getOrDefault(rightChar,0)+1);
+			frequencyMap.put(rightChar, frequencyMap.getOrDefault(rightChar,0)+1);//add new charecter in hashmapfrequency if not present else update charecter frequency in hashmapfrequency
 
-			while(frequencyMap.size()>k)
+			while(frequencyMap.size()>k)//if frequencyMap is greater than size k then shrink the window until it is equal to k
 			{
 				leftChar = str.charAt(windowStart);
-				frequencyMap.put(leftChar,frequencyMap.get(leftChar)-1);
-				if(frequencyMap.get(leftChar)==0)
+				frequencyMap.put(leftChar,frequencyMap.get(leftChar)-1); 
+				if(frequencyMap.get(leftChar)==0)// if character frequency is 0 then it is not present in the substring so remove it from the mapfrequency
 					frequencyMap.remove(leftChar);
 				windowStart++;
 			}
